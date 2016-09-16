@@ -7,6 +7,7 @@ class Menu:
     def __init__(self):
         self.menuItems = [
                 "Newton-Raphson",
+                "Newton Mod 1",
                 "Quit"
             ]
 
@@ -24,7 +25,6 @@ class Menu:
                 ''')
             for menuItem in self.menuItems:
                 print(">> " + menuItem)
-            print(".")
             self.processInput()
         print("Goodbye.\n\n")
     
@@ -35,14 +35,26 @@ class Menu:
             if input("Press 'y', then RETURN if correct.") == "y":
                 f = input("Enter function 'f(x)' as valid Python expression, using 'x' as the single variable: ")
                 fprime = input("Enter derivative of f(x) as valid Python expression, using 'x' as the single variable: ")
-                lo = float(input("Enter lower bound of region: "))
-                hi = float(input("Enter higher bound of region: "))
+                p0 = float(input("Enter initial estimate: "))
                 tol = float(input("Enter tolerance for answer: "))
                 maxIterations = float(input("Enter maximum iterations before giving up: "))
-                print(algo.newtonRaphson(f, fprime, lo, hi, tol,
+                print(algo.newtonRaphson(f, fprime, p0, tol,
                     maxIterations))
             else:
                 return
+        elif choice == "Newton Mod 1":
+            print(">> You have selected Netwon-Raphson Modification 1.")
+            if input("Press 'y', then RETURN if correct.") == "y":
+                f = input("Enter function 'f(x)' as valid Python expression, using 'x' as the single variable: ")
+                fprime = input("Enter derivative of f(x) as valid Python expression, using 'x' as the single variable: ")
+                p0 = float(input("Enter inital guess: "))
+                tol = float(input("Enter tolerance for answer: "))
+                maxIterations = float(input("Enter maximum iterations before giving up: "))
+                m = int(input("Enter multiplicity as integer:"))
+                print(algo.newtonRaphsonMod1(f, fprime, p0, tol, maxIterations, m))
+            else:
+                return
+
         elif choice == "Quit":
             sys.exit() 
 
