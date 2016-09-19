@@ -8,6 +8,7 @@ class Menu:
         self.menuItems = [
                 "Newton-Raphson",
                 "Newton Mod 1",
+                "Newton Mod 2",
                 "Quit"
             ]
 
@@ -54,7 +55,18 @@ class Menu:
                 print(algo.newtonRaphsonMod1(f, fprime, p0, tol, maxIterations, m))
             else:
                 return
-
+        elif choice == "Newton Mod 2":
+            print(">> You have selected Netwon-Raphson Modification 2.")
+            if input("Press 'y', then RETURN if correct.") == "y":
+                f = input("Enter function 'f(x)' as valid Python expression, using 'x' as the single variable: ")
+                fprime = input("Enter derivative of f(x) as valid Python expression, using 'x' as the single variable: ")
+                fdoubleprime = input("Enter second derivative of f(x), using 'x' as the single variable: ")
+                p0 = float(input("Enter inital guess: "))
+                tol = float(input("Enter tolerance for answer: "))
+                maxIterations = float(input("Enter maximum iterations before giving up: "))
+                print(algo.newtonRaphsonMod2(f, fprime, fdoubleprime, p0, tol, maxIterations))
+            else:
+                return
         elif choice == "Quit":
             sys.exit() 
 
