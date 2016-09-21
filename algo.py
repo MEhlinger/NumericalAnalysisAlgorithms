@@ -72,10 +72,10 @@ def secantMethod(g,p0,p1, tol, maxIterations):
     q0 = util.substituteXAndEval(g,p0)
     q1 = util.substituteXAndEval(g,p1)
     notFirstIteration = False
-    while (abs(p - p0) > tol):
+    while (abs(p - p1) > tol):
         if notFirstIteration:
             p1 = p
-        p =  p1 - (q1 * (p1-p0)/(q1-q0))
+        p =  p1 - ((q1 * (p1-p0))/(q1-q0))
         lineOutput = "p{}:{}\n".format(i,p0)
         i += 1
         p0 = p1
