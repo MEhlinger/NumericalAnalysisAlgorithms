@@ -63,3 +63,28 @@ def newtonRaphsonMod2(f, fPrime, fDoublePrime, p0, tol, maxIterations):
             failed.".format(maxIterations)
     outputString += ">>> p={}\n".format(p)
     return outputString
+
+
+def secantMethod(g,p0,p1, tol, maxIterations):
+    outputString = ""
+    p = 0
+    i = 2
+    q0 = util.substituteXAndEval(g,p0)
+    q1 = util.substituteXAndEval(g,p1)
+    notFirstIteration = False
+    while (abs(p - p0) > tol):
+        if notFirstIteration:
+            p1 = p
+        p =  p1 - (q1 * (p1-p0)/(q1-q0))
+        lineOutput = "p{}:{}\n".format(i,p0)
+        i += 1
+        p0 = p1
+        q0 = q1
+        q1 = util.substituteXAndEval(g, p)
+        outputString += lineOutput
+        notFirstIteration = True
+        if i > maxIterations:
+            return "Max Iterations ({}) reached, method\
+            failed.".format(maxIterations)
+    outputString += ">>> p={}\n".format(p)
+    return outputString
