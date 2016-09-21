@@ -1,59 +1,65 @@
 #!/usr/bin/env python3
 
-import math #for use in eval() of user-inputted functions (math.e, for example)
+import util
 
-def substituteXAndEval(functionString, x):
-    return eval(functionString.replace("x", str(x)))
 
 def newtonRaphson(f, fprime, p0, tol, maxIterations):
+    outputString = ""
     p = 0
     i = 0
     notFirstIteration = False
     while (abs(p - p0) > tol):
         if notFirstIteration:
             p0 = p
-        p =  p0 - substituteXAndEval(f,p0) / substituteXAndEval(fprime,p0)
+        p =  p0 - util.substituteXAndEval(f,p0) / util.substituteXAndEval(fprime,p0)
         i += 1
-        print("p: " + str(p) + ", p0: " + str(p0))
+        lineOutput = "i:{}, p:{}, p0:{}\n".format(i, p, p0)
+        outputString += lineOutput
         notFirstIteration = True
         if i > maxIterations:
             return "Max Iterations ({}) reached, method\
             failed.".format(maxIterations)
     print("Newton-Raphson succeeded on {}th iteration.".format(i))
-    return ">>> p={}".format(p)
+    outputString += ">>> p={}\n".format(p)
+    return outputString
         
 def newtonRaphsonMod1(f, fprime, p0, tol, maxIterations, m): 
+    outputString = ""
     p = 0
     i = 0
     notFirstIteration = False
     while (abs(p - p0) > tol):
         if notFirstIteration:
             p0 = p
-        p =  p0 - (m * substituteXAndEval(f,p0) / substituteXAndEval(fprime,p0))
+        p =  p0 - (m * util.util.substituteXAndEval(f,p0) / util.substituteXAndEval(fprime,p0))
         i += 1
-        print("p: " + str(p) + ", p0: " + str(p0))
+        lineoutput = "i:{}, p:{}, p0:{}\n".format(i, p, p0)
+        outputString += lineOutput
         notFirstIteration = True
         if i > maxIterations:
             return "Max Iterations ({}) reached, method failed.".format(maxIterations)
     print("Newton-Raphson succeeded on {}th iteration.".format(i))
-    return ">>> p={}".format(p)
+    outputString += ">>> p={}\n".format(p)
+    return outputString
 
 
 def newtonRaphsonMod2(f, fPrime, fDoublePrime, p0, tol, maxIterations):
+    outputString = ""
     p = 0
     i = 0
     notFirstIteration = False
     while (abs(p - p0) > tol):
         if notFirstIteration:
             p0 = p
-        if (substituteXAndEval(fPrime,p0)**2 - substituteXAndEval(f,p0) * substituteXAndEval(fDoublePrime, p0)) == 0:
+        if (util.util.substituteXAndEval(fPrime,p0)**2 - util.substituteXAndEval(f,p0) * util.substituteXAndEval(fDoublePrime, p0)) == 0:
             return "Attempted divison by 0. Not valid."
-        p =  p0 - (substituteXAndEval(f,p0) * substituteXAndEval(fPrime, p0)) / (substituteXAndEval(fPrime,p0)**2 - substituteXAndEval(f,p0) * substituteXAndEval(fDoublePrime, p0))
+        p =  p0 - (util.util.substituteXAndEval(f,p0) * util.substituteXAndEval(fPrime, p0)) / (util.substituteXAndEval(fPrime,p0)**2 - util.substituteXAndEval(f,p0) * util.substituteXAndEval(fDoublePrime, p0))
         i += 1
-        print("p: " + str(p) + ", p0: " + str(p0))
+        lineoutput = "i:{}, p:{}, p0:{}\n".format(i, p, p0)
+        outputString += lineOutput
         notFirstIteration = True
         if i > maxIterations:
             return "Max Iterations ({}) reached, method\
             failed.".format(maxIterations)
-    print("Newton-Raphson succeeded on {}th iteration.".format(i))
-    return ">>> p={}".format(p)
+    outputString += ">>> p={}\n".format(p)
+    return outputString

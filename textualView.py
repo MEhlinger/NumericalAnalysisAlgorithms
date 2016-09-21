@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import algo, sys
+import algo, sys, util
 
 class Menu:
 
@@ -27,20 +27,20 @@ class Menu:
             for menuItem in self.menuItems:
                 print(">> " + menuItem)
             self.processInput()
-        print("Goodbye.\n\n")
     
     def processInput(self):
         choice = input("\nEnter your choice -exactly- as in menu  and press RETURN: \n")
         if choice == "Newton-Raphson":
             print(">> You have selected Netwon-Raphson.")
             if input("Press 'y', then RETURN if correct.") == "y":
-                f = input("Enter function 'f(x)' as valid Python expression, using 'x' as the single variable: ")
-                fprime = input("Enter derivative of f(x) as valid Python expression, using 'x' as the single variable: ")
+                f = input("Enter function 'f(x)' as valid Python expression: ")
+                fprime = input("Enter f'(x) as valid Python expression: ")
                 p0 = float(input("Enter initial estimate: "))
                 tol = float(input("Enter tolerance for answer: "))
                 maxIterations = float(input("Enter maximum iterations before giving up: "))
-                print(algo.newtonRaphson(f, fprime, p0, tol,
-                    maxIterations))
+                outputFilename = input("Enter Output Filename: ")
+                util.printAndWriteStringToFile(algo.newtonRaphson(f, fprime, p0, tol,
+                    maxIterations), outputFilename)
             else:
                 return
         elif choice == "Newton Mod 1":
@@ -68,9 +68,7 @@ class Menu:
             else:
                 return
         elif choice == "Quit":
+            print("Goodbye.\n\n")
             sys.exit() 
 
 
-if __name__ == "__main__":
-    menu = Menu()
-    menu.display()
